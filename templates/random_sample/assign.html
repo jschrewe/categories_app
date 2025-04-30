@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Assign Category - Random Sample
+{% endblock %}
+
+{% block content %}
+<article>
+    <h2>Kategorie zuweisen ({{ total_count - unassigned_count + 1 }}/{{ total_count }})</h2>
+    <p>
+        <progress value="{{ total_count - unassigned_count }}" max="{{ total_count }}" />
+    </p>
+    <form method="POST">
+        <p>Bemerkungstext:</p>
+        <article>
+            {{ entry['further_remarks'] }}
+        </article>
+        <label for="category">Kategorie:</label>
+        <fieldset role="group">
+        <select name="category" id="category" required>
+            {% for category in categories %}
+            <option value="{{ category['id'] }}">{{ category['name'] }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="button">Zuweisen</button>
+        </fieldset>
+    </form>
+    <p>
+        <a href="{{ url_for('random_sample.index') }}" role="button" class="outline secondary">&laquo; Zur Übersicht</a>
+    </p>
+</article>
+{% endblock %}

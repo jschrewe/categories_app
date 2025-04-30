@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Random Sample - My Flask App
+{% endblock %}
+
+{% block content %}
+<article>
+    <h2>Trainingssample</h2>
+    <p>
+        {{ total_count - unassigned_count }} von {{ total_count }} Einträge zugewiesen
+    </p>
+    <p>
+        <progress value="{{ total_count - unassigned_count }}" max="{{ total_count }}" />
+    </p>
+    <nav>
+        <ul>
+            <li>
+                <a href="{{ url_for('random_sample.assign_category') }}" role="button">
+                    Kategorien zuweisen
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('random_sample.generate_random_sample') }}" role="button" class="outline" data-tooltip="Löscht das aktuelle Sample, aber nicht die zugewiesenen Kategorien.">
+                    Sample erzeugen
+                </a>
+            </li>
+        </ul>
+    </nav>
+    {% if data %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Further Remarks</th>
+                <th>Assigned</th>
+                <th>Category</th>
+                <th>ML Assigned</th>
+                <th>ML Category</th>
+                <th>ML Probability</th>
+                <th>Random Sampled</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row['id'] }}</td>
+                <td>{{ row['further_remarks'] }}</td>
+                <td>{{ row['assigned'] }}</td>
+                <td>{{ row['category'] }}</td>
+                <td>{{ row['ml_assigned'] }}</td>
+                <td>{{ row['ml_category'] }}</td>
+                <td>{{ row['ml_probability'] }}</td>
+                <td>{{ row['random_sampled'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        {% if total_count == 0 %}
+        <p>Noch kein Sample angelegt.</p>
+        {% else %}
+        <p>Alles zugewiesen :)</p>
+        {% endif %}
+    {% endif %}
+</article>
+{% endblock %}

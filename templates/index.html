@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home - Kategorisieren
+{% endblock %}
+
+{% block content %}
+<article>
+    <h2>Alle Einträge</h2>
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Further Remarks</th>
+                <th>Assigned</th>
+                <th>Category</th>
+                <th>Random Sampled</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row['id'] }}</td>
+                <td>{{ row['further_remarks'] }}</td>
+                <td>{{ row['assigned'] }}</td>
+                <td>{{ row['category'] }}</td>
+                <td>{{ row['random_sampled'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</article>
+{% endblock %}
