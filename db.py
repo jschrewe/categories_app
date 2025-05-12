@@ -37,6 +37,7 @@ def init_db():
         db.executescript(f.read().decode('utf8'))
 
     categories_data = {
+        0: 'Löschen',
         1: 'U Unterrichtszeit',
         2: 'A Vertretungsstunden',
         3: 'A Aufsichten',

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Machine Learning Predictions
+{% endblock %}
+
+{% block content %}
+<article>
+    <h2>Machine Learning Predictions</h2>
+    <a href="{{ url_for('machine_learning.train') }}" role="button">Training</a>
+    <hr>
+    {% if data %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Further Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row['id'] }}</td>
+                <td>{{ row['further_remarks'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No machine learning predictions available.</p>
+    {% endif %}
+</article>
+{% endblock %}

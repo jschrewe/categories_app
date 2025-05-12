@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Train Machine Learning Model
+{% endblock %}
+
+{% block content %}
+<article>
+    <h2>Training Results</h2>
+
+    <section>
+        <h3>Descriptive Statistics</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Total Rows</td>
+                    <td>{{ statistics['total_rows'] }}</td>
+                </tr>
+                <tr>
+                    <td>Unique Values</td>
+                    <td>{{ statistics['unique_values'] }}</td>
+                </tr>
+                <tr>
+                    <td>Top Keywords</td>
+                    <td>{{ statistics['keywords'] | join(', ') }}</td>
+                </tr>
+                {% for key, value in statistics['rows_with_more_than_10'].items() %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h3>Training Data</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sentence</th>
+                    <th>Assigned Category</th>
+                    <th>Predicted Category</th>
+                    <th>Probability</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>{{ row['sentence'] }}</td>
+                    <td>{{ row['assign_cat'] }}</td>
+                    <td>{{ row['predicted_cat'] }}</td>
+                    <td>{{ row['prob'] | round(2) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</article>
+{% endblock %}
